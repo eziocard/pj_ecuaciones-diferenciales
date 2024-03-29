@@ -1,5 +1,5 @@
 import math
-
+import matplotlib.pyplot as plt
 
 def mtd_euler(f,x0,y0,h,n):
 
@@ -35,3 +35,6 @@ val_x,val_y = mtd_euler(f,x0,y0,h,n)
 
 for x,y in zip(val_x,val_y):
     print(f'x = {x:.2f}, y= {y:.4f}')
+
+plt.plot(val_x,val_y)
+plt.show()
