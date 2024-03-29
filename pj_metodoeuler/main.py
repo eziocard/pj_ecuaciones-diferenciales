@@ -15,5 +15,8 @@ def mtd_euler(f,x0,y0,h,n):
         xn = n + h
         yn = y + h*f(x,y)
 
+        val_x.append(xn)
+        val_y.append(yn)
+
 
     return val_x, val_y
