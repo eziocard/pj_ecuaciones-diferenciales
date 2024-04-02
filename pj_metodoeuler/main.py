@@ -1,3 +1,4 @@
+
 import math
 
 
@@ -11,8 +12,11 @@ def mtd_euler(f,x0,y0,h,n):
         x = val_x[-1]
         y = val_y[-1]
 
+        yn = y + (h*f(x,y))
+
         xnew = x + h
-        ynew = y + h*f(x,y)
+
+        ynew = y + (h*(f(x,y) + f(xnew,yn)))/2
 
         val_x.append(xnew)
         val_y.append(ynew)
@@ -22,13 +26,13 @@ def mtd_euler(f,x0,y0,h,n):
 
 "colocar funcion"
 def f(x,y):
-    return x*math.sqrt(y)
+    return 2*y*x
 
 "colocar condiciones iniciales"
-x0 = 1
-y0 = 4
+x0 =1
+y0 = 1
 h = 0.1
-n = 6
+n = 5
 
 val_x,val_y = mtd_euler(f,x0,y0,h,n)
 
