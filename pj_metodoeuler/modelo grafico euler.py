@@ -1,6 +1,7 @@
 import sys
 import matplotlib.pyplot as plt
 import pygame
+import sympy as sp
 
 
 FPS = 3
@@ -37,10 +38,15 @@ n = 2000
 
 
 val_x,val_y = mtd_euler(f,x0,y0,h,n)
-
+errores = []
 for x,y in zip(val_x,val_y):
-    print(f'x = {x:.2f}, y= {y}')
+    print(f'x = {x:.2f}, y= {y:2f}')
+    errores.append((100 + (-80) * sp.exp(-0.02531780798 * x))-y)
 
+print(errores)
+
+promedio = sum(errores)/len(errores)
+print("Error Promedio {}".format(promedio))
 '''  grafico de matplot lib
 plt.plot(val_x,val_y)
 plt.xlabel("Tiempo")
@@ -101,6 +107,7 @@ while True:
             pygame.draw.rect(ventana, negro, (50, 50, 700, 20), 2)
         except:
             print("error")
+
 
     pygame.display.update()
     RELOJ.tick(FPS)
