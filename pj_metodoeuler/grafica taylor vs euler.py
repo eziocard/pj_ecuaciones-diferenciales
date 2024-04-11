@@ -102,11 +102,44 @@ for x,y in zip(val_x,val_y):
     print(f'x = {x:.2f}, y= {y:.4f}')
 
 
+
+
+def mtd_analitico(rangoDeX):
+
+    val_x = []
+    val_y = []
+
+
+    for i in range(rangoDeX+1):
+
+        ynew=100 + (-80) * sp.exp(-0.02531780798 * i)
+
+
+        val_x.append(i)
+        val_y.append(ynew)
+
+
+    return val_x, val_y
+
+"colocar funcion"
+def f(x,y):
+    return -0.02531780798*(y-100)
+
+"colocar condiciones iniciales"
+rangoDeX = 250
+
+val_x,val_y = mtd_analitico(rangoDeX)
+aval_x,aval_y = mtd_analitico(rangoDeX)
+for x,y in zip(val_x,val_y):
+    print(f'x = {x:.2f}, y= {y}')
+
+
 plt.plot(eval_x,eval_y, linestyle = "-.",label = "metodo euler" )
 plt.plot(tval_x,tval_y,linestyle = "--", label = "metodo taylor")
+plt.plot(aval_x,aval_y,linestyle = ":")
 plt.xlabel("Tiempo")
 plt.ylabel("Temperatura")
-plt.legend(["metodo euler","metodo taylor"],loc=2)
+plt.legend(["metodo euler","metodo taylor","metodo analitico"],loc=2)
 plt.title("Ley de enfriamiento")
 plt.show()
 
