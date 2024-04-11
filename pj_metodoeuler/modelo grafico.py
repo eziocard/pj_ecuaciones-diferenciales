@@ -12,7 +12,12 @@ blanco = (255,255,255)
 rojo = (255,0,0)
 negro = (0,0,0)
 amarillo = 	(255, 255, 0)
+posicion_texto = (100, 100)
 
+"fuente del texto"
+font = pygame.font.Font(None, 36)
+text_temperatura = font.render("temperatura:", True,negro)
+ventana.blit(text_temperatura,True,posicion_texto)
 "creacion de la tasa"
 ventana.fill(blanco)
 pygame.draw.rect(ventana,rojo,(350,499,100,100))
