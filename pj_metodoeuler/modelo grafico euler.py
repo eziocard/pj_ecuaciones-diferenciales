@@ -1,7 +1,7 @@
 import sys
-import time
+import matplotlib.pyplot as plt
 import pygame
-import sympy as sp
+
 
 FPS = 3
 RELOJ = pygame.time.Clock()
@@ -41,9 +41,13 @@ val_x,val_y = mtd_euler(f,x0,y0,h,n)
 for x,y in zip(val_x,val_y):
     print(f'x = {x:.2f}, y= {y}')
 
-
-
-
+'''  grafico de matplot lib
+plt.plot(val_x,val_y)
+plt.xlabel("Tiempo")
+plt.ylabel("Temperatura")
+plt.title("Ley de enfriamiento")
+plt.show()
+'''
 
 
 
@@ -65,6 +69,7 @@ ventana.fill(blanco)
 
 cont = 0
 while True:
+
     cont = cont +1
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -96,5 +101,6 @@ while True:
             pygame.draw.rect(ventana, negro, (50, 50, 700, 20), 2)
         except:
             print("error")
+
     pygame.display.update()
     RELOJ.tick(FPS)
