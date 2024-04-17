@@ -2,6 +2,9 @@ import sys
 
 import pygame
 import sympy as sp
+from matplotlib import pyplot as plt
+
+
 class Metodo:
     def __init__(self,f,x0,y0,h,n):
         self.f = f
@@ -37,7 +40,7 @@ class Metodo:
         print(errores)
 
         promedio = sum(errores) / len(errores)'''
-        return val_y
+        return val_x,  val_y
 
     def metodo_taylor(self,orden):
         x = sp.Symbol("x")
@@ -74,9 +77,21 @@ class Metodo:
 
         promedio = sum(errores) / len(errores)
         print("Error Promedio {}".format(promedio))'''
-        return val_y
+        return val_x, val_y
 
-    def graficar(self,val_y):
+    def grafica_matlab(self,orden):
+        eval_x,eval_y = self.metodo_euler()
+        tval_x,tval_y = self.metodo_taylor(orden)
+        plt.plot(eval_x, eval_y, linestyle="-.", label="metodo euler")
+        plt.plot(tval_x, tval_y, linestyle="--", label="metodo taylor")
+        plt.xlabel("Tiempo")
+        plt.ylabel("Temperatura")
+        plt.legend(["metodo euler", "metodo taylor"], loc=2)
+        plt.title("Ley de enfriamiento")
+        plt.show()
+
+
+    def graficar(self,val_x,val_y):
         FPS = 3
         RELOJ = pygame.time.Clock()
         pygame.init()
@@ -85,10 +100,7 @@ class Metodo:
 
         blanco = (255, 255, 255)
         fondo = (88, 233, 242)
-        rojo = (255, 0, 0)
         negro = (0, 0, 0)
-        amarillo = (255, 255, 0)
-        posicion_texto = (100, 100)
         aluminio = (201, 197, 193)
         font = pygame.font.Font(None, 36)
         fontcirculo = pygame.font.Font(None, 20)
@@ -113,15 +125,26 @@ class Metodo:
                     texto_circulo = fontcirculo.render("Barra aluminio", True, negro)
                     ventana.blit(texto_circulo, (347, 515))
                     pygame.draw.circle(ventana, negro, (390, 520), 80, 1)
+                    color = 201+cont*3
                     if val_y[cont] > 50:
                         if 7 * cont < 255:
-                            pygame.draw.rect(ventana, (7 * cont, 160, 0), (50, 50, int(val_y[cont]) * 7, 20))
+                            try:
+                                pygame.draw.rect(ventana, (7 * cont, 160, 0), (50, 50, int(val_y[cont]) * 7, 20))
+                                pygame.draw.rect(ventana, (7, 160, 0), (50, 50, int(val_y[cont]) * 7, 20))
+
+                            except:
+                                pygame.draw.rect(ventana, (7 * cont, 160, 0), (50, 50, int(val_y[cont]) * 7, 20))
+                                pygame.draw.circle(ventana,(255, 197, 193), (390, 520), 80, 0)
+                                pygame.draw.circle(ventana, negro, (390, 520), 80, 1)
+
 
                         else:
                             try:
                                 pygame.draw.rect(ventana, (255, 160 - 7 * cont, 0), (50, 50, int(val_y[cont]) * 7, 20))
+
                             except:
                                 pygame.draw.rect(ventana, (255, 0, 0), (50, 50, int(val_y[cont]) * 7, 20))
+
 
                     else:
                         pygame.draw.rect(ventana, (7 * cont, 160, 0), (50, 50, int(val_y[cont]) * 7, 20))
@@ -131,4 +154,5 @@ class Metodo:
 
             pygame.display.update()
             RELOJ.tick(FPS)
+
 
