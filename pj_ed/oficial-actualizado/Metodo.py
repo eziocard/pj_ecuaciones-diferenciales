@@ -28,7 +28,7 @@ class Metodo:
 
             val_x.append(xnew)
             val_y.append(ynew)
-
+        '''
         errores = []
         for x, y in zip(val_x, val_y):
             print(f'x = {x:.2f}, y= {y}')
@@ -36,7 +36,7 @@ class Metodo:
 
         print(errores)
 
-        promedio = sum(errores) / len(errores)
+        promedio = sum(errores) / len(errores)'''
         return val_y
 
     def metodo_taylor(self,orden):
@@ -48,14 +48,13 @@ class Metodo:
         val_y = [self.y0]
         F = (self.f())
         Fs = []
-        Fs = []
         yformula = y
         for i in range(orden):
             Fs.append(F)
             F = sp.diff(F, "y") * self.f()  # regla de la cadena
 
         for p, q in enumerate(Fs):
-            yformula += (hs ** p * q) / (p + 1)
+            yformula += (hs ** p * q) / sp.factorial(p + 1)
 
         for i in range(self.n):
             xn = val_x[-1]
@@ -66,7 +65,7 @@ class Metodo:
 
             val_x.append(xnew)
             val_y.append(ynew)
-
+        '''
         errores =[]
 
         for x, y in zip(val_x, val_y):
@@ -74,7 +73,7 @@ class Metodo:
             errores.append((100 + (-80) * sp.exp(-0.02531780798 * x)) - y)
 
         promedio = sum(errores) / len(errores)
-        print("Error Promedio {}".format(promedio))
+        print("Error Promedio {}".format(promedio))'''
         return val_y
 
     def graficar(self,val_y):
