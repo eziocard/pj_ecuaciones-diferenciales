@@ -14,7 +14,7 @@ def f():
 
     return k * (y - 100)
 
-m = Metodo(f,0,20,1,2000)
+m = Metodo(f,0,20,1,250)
 orden = 5
 
 pygame.init()
@@ -43,7 +43,11 @@ while True:
                 m.graficar(val_x, val_y)
 
             if grafica.collidepoint(pygame.mouse.get_pos()):
-                m.grafica_matplotlib(orden)
+                val_x, val_y = m.metodo_euler()
+                error_euler =m.error(val_x, val_y)
+                val_x, val_y = m.metodo_taylor(orden)
+                error_taylor = m.error(val_x, val_y)
+                m.grafica_matplotlib(orden,error_euler,error_taylor)
 
 
     Pantalla.fill((255, 255, 255))
