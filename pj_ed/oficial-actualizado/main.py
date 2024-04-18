@@ -43,7 +43,7 @@ while True:
                 m.graficar(val_x, val_y)
 
             if grafica.collidepoint(pygame.mouse.get_pos()):
-                m.grafica_matlab(orden)
+                m.grafica_matplotlib(orden)
 
 
     Pantalla.fill((255, 255, 255))

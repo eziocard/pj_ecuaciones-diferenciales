@@ -79,7 +79,7 @@ class Metodo:
         print("Error Promedio {}".format(promedio))'''
         return val_x, val_y
 
-    def grafica_matlab(self,orden):
+    def grafica_matplotlib(self,orden):
         eval_x,eval_y = self.metodo_euler()
         tval_x,tval_y = self.metodo_taylor(orden)
         plt.plot(eval_x, eval_y, linestyle="-.", label="metodo euler")
